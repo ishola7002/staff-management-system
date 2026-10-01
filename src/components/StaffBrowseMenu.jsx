@@ -64,13 +64,13 @@ function StaffBrowseMenu() {
     <div className="relative" ref={menuRef}>
       <button
         onClick={() => setOpen((prev) => !prev)}
-        className="hover:text-funato-brown-light"
+        className="hover:text-funato-brown-light text-sm sm:text-base"
       >
         Units
       </button>
 
-      {open && (
-        <div className="absolute top-full left-0 bg-white border border-funato-brown-light rounded-md shadow-lg w-64 z-50 text-funato-brown-dark max-h-[70vh] overflow-y-auto">
+     {open && (
+  <div className="fixed top-16 left-0 right-0 sm:absolute sm:top-full sm:left-0 sm:right-auto bg-white border border-funato-brown-light rounded-md shadow-lg w-screen sm:w-80 mx-0 sm:mx-0 z-50 text-funato-brown-dark max-h-[calc(100vh-64px)] overflow-y-auto">
           {/* Teaching row */}
           <div>
             <button
@@ -85,9 +85,9 @@ function StaffBrowseMenu() {
                   <div key={c.id}>
                     <button
                       onClick={() => toggleCollege(c.id)}
-                      className="w-full text-left px-5 py-2 hover:bg-white flex justify-between items-center text-sm"
+                      className="w-full text-left px-5 py-2 hover:bg-white flex justify-between items-center text-sm break-words"
                     >
-                      {c.name} <span>{openCollegeId === c.id ? '⌄' : '›'}</span>
+                      <span className="flex-1">{c.name}</span> <span className="flex-shrink-0 ml-2">{openCollegeId === c.id ? '⌄' : '›'}</span>
                     </button>
                     {openCollegeId === c.id && (
                       <div className="bg-white">
@@ -96,7 +96,7 @@ function StaffBrowseMenu() {
                             key={d.id}
                             to={`/departments/${d.id}`}
                             onClick={closeAll}
-                            className="block px-7 py-2 hover:bg-funato-cream text-sm"
+                            className="block px-7 py-2 hover:bg-funato-cream text-sm break-words"
                           >
                             {d.name}
                           </Link>

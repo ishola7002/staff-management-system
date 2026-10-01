@@ -37,15 +37,16 @@ function StaffProfile() {
   const hasPublicationsContent = version.publications || activeLinks.length > 0
 
   return (
-    <div className="max-w-5xl mx-auto">
+    <div className="max-w-5xl mx-auto px-4 sm:px-6">
       <Link to={backLink} className="text-sm text-funato-brown-dark hover:underline">
         ← Back to {backLabel}
       </Link>
 
-      <div className="bg-white border border-funato-brown-light rounded-lg p-6 mt-4">
-        <div className="flex gap-8">
+      <div className="bg-white border border-funato-brown-light rounded-lg p-4 sm:p-6 mt-4">
+        {/* Mobile: stack, Desktop: side-by-side */}
+        <div className="flex flex-col md:flex-row gap-6 md:gap-8">
           {/* LEFT: Image */}
-          <div className="flex-shrink-0 w-56">
+          <div className="flex-shrink-0 w-full md:w-56">
             {version.photo_url ? (
               <img
                 src={version.photo_url}
@@ -58,49 +59,49 @@ function StaffProfile() {
           </div>
 
           {/* RIGHT: Content */}
-          <div className="flex-1">
-            <h1 className="font-serif-display text-funato-brown text-3xl font-bold">{version.full_name}</h1>
+          <div className="flex-1 min-w-0">
+            <h1 className="font-serif-display text-funato-brown text-2xl sm:text-3xl font-bold break-words">{version.full_name}</h1>
             
             {profile.designations?.title && (
-              <p className="text-funato-brown-dark font-medium text-lg mt-1">{profile.designations.title}</p>
+              <p className="text-funato-brown-dark font-medium text-base sm:text-lg mt-1">{profile.designations.title}</p>
             )}
             
-            <p className="text-funato-brown-dark mt-2">
+            <p className="text-funato-brown-dark mt-2 text-sm sm:text-base">
               {isTeaching
                 ? `${profile.departments?.name || ''}${profile.colleges?.name ? ', ' + profile.colleges.name : ''}`
                 : profile.units?.name}
             </p>
             
             {version.email && (
-              <p className="text-sm text-funato-brown-light mt-2">{version.email}</p>
+              <p className="text-xs sm:text-sm text-funato-brown-light mt-2 break-all">{version.email}</p>
             )}
             
             {version.phone && (
-              <p className="text-sm text-funato-brown-light">{version.phone}</p>
+              <p className="text-xs sm:text-sm text-funato-brown-light">{version.phone}</p>
             )}
 
             {version.bio_qualifications && (
               <div className="mt-6">
-                <h2 className="text-funato-brown font-semibold mb-2">
+                <h2 className="text-funato-brown font-semibold mb-2 text-sm sm:text-base">
                   {isTeaching ? 'Qualifications' : 'Role'}
                 </h2>
-                <p className="text-funato-brown-dark whitespace-pre-line leading-relaxed">{version.bio_qualifications}</p>
+                <p className="text-funato-brown-dark whitespace-pre-line leading-relaxed text-sm sm:text-base">{version.bio_qualifications}</p>
               </div>
             )}
 
             {isTeaching && version.research_interests && (
               <div className="mt-4">
-                <h2 className="text-funato-brown font-semibold mb-2">Research Interests</h2>
-                <p className="text-funato-brown-dark whitespace-pre-line leading-relaxed">{version.research_interests}</p>
+                <h2 className="text-funato-brown font-semibold mb-2 text-sm sm:text-base">Research Interests</h2>
+                <p className="text-funato-brown-dark whitespace-pre-line leading-relaxed text-sm sm:text-base">{version.research_interests}</p>
               </div>
             )}
 
             {hasPublicationsContent && (
               <div className="mt-4">
-                <h2 className="text-funato-brown font-semibold mb-2">Professional Links</h2>
+                <h2 className="text-funato-brown font-semibold mb-2 text-sm sm:text-base">Professional Links</h2>
 
                 {version.publications && (
-                  <p className="text-funato-brown-dark whitespace-pre-line leading-relaxed mb-3">{version.publications}</p>
+                  <p className="text-funato-brown-dark whitespace-pre-line leading-relaxed mb-3 text-sm sm:text-base">{version.publications}</p>
                 )}
 
                 {activeLinks.length > 0 && (
@@ -112,7 +113,7 @@ function StaffProfile() {
                           href={version[f.key]}
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="text-xs bg-funato-cream text-funato-brown-dark px-3 py-1.5 rounded-full border border-funato-brown-light hover:bg-funato-brown hover:text-funato-cream transition"
+                          className="text-xs bg-funato-cream text-funato-brown-dark px-2.5 sm:px-3 py-1.5 rounded-full border border-funato-brown-light hover:bg-funato-brown hover:text-funato-cream transition"
                         >
                           {f.label}
                         </a>
@@ -125,12 +126,12 @@ function StaffProfile() {
 
             {version.cv_storage_path && (
               <div className="mt-4">
-                <h2 className="text-funato-brown font-semibold mb-2">CV</h2>
+                <h2 className="text-funato-brown font-semibold mb-2 text-sm sm:text-base">CV</h2>
                 <a
                   href={version.cv_storage_path}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-block text-xs bg-funato-brown text-funato-cream px-3 py-1.5 rounded-full hover:bg-funato-brown-dark transition"
+                  className="inline-block text-xs bg-funato-brown text-funato-cream px-2.5 sm:px-3 py-1.5 rounded-full hover:bg-funato-brown-dark transition"
                 >
                   View CV
                 </a>
