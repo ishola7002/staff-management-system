@@ -1,0 +1,10 @@
+@import "tailwindcss";
+
+@theme {
+  --color-funato-brown: #6b4226;
+  --color-funato-brown-dark: #4a2c18;
+  --color-funato-brown-light: #a97d5d;
+  --color-funato-cream: #f5efe6;
+  --color-funato-gold: #b8863b;
+  --font-serif-display: "Lora", Georgia, serif;
+}
