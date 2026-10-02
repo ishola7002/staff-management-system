@@ -18,7 +18,6 @@ function ProfileEditor() {
   const [departmentId, setDepartmentId] = useState('')
   const [unitId, setUnitId] = useState('')
   const [designationId, setDesignationId] = useState('')
-  const [email, setEmail] = useState('')
   const [phone, setPhone] = useState('')
   const [bio, setBio] = useState('')
   const [researchInterests, setResearchInterests] = useState('')
@@ -56,7 +55,6 @@ function ProfileEditor() {
 
   useEffect(() => {
     if (latestVersion) {
-      setEmail(latestVersion.email || '')
       setPhone(latestVersion.phone || '')
       setBio(latestVersion.bio_qualifications || '')
       setResearchInterests(latestVersion.research_interests || '')
@@ -116,6 +114,9 @@ function ProfileEditor() {
       setSubmitting(false)
       return
     }
+
+    // Get email from auth user (registered at signup)
+    const userEmail = user.email
 
     // Only the very first submission writes straight to staff_profiles, so a
     // brand new person has somewhere to attach to. From then on, staff_profiles
@@ -188,7 +189,7 @@ function ProfileEditor() {
       unit_id: staffType === 'non_teaching' ? unitId : null,
       designation_id: designationId,
       full_name: fullName,
-      email,
+      email: userEmail,
       phone,
       bio_qualifications: bio,
       research_interests: staffType === 'teaching' ? researchInterests : null,
@@ -358,17 +359,6 @@ function ProfileEditor() {
             <option value="">Select a designation</option>
             {designations.map((d) => <option key={d.id} value={d.id}>{d.title}</option>)}
           </select>
-        </div>
-
-        <div>
-          <label className="block text-sm text-funato-brown-dark mb-1">Email</label>
-          <input
-            type="email"
-            required
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            className="w-full border border-funato-brown-light rounded-md px-3 py-2"
-          />
         </div>
 
         <div>

@@ -11,7 +11,7 @@ function PublicLayout() {
             <img src={funatoLogo} alt="FUNATO logo" className="h-10 w-10 object-contain" />
             <span className="font-bold text-lg">FUNATO Staff Directory</span>
           </Link>
-          <div className="flex gap-6 text-sm font-medium">
+          <div className="flex items-center gap-6 text-sm font-medium">
             <Link to="/" className="hover:text-funato-brown-light">Home</Link>
             <StaffBrowseMenu />
             <Link to="/staff/login" className="hover:text-funato-brown-light">Staff Login</Link>

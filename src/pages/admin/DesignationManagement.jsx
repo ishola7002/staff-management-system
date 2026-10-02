@@ -23,7 +23,7 @@ function DesignationManagement() {
 
   async function loadDesignations() {
     setLoading(true)
-    const { data } = await supabase.from('designations').select('*').order('staff_type').order('title')
+    const { data } = await supabase.from('designations').select('*').order('staff_type').order('created_at', { ascending: true })
     setDesignations(data || [])
     setLoading(false)
   }

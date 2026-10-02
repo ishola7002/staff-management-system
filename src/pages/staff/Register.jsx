@@ -1,10 +1,11 @@
 import { useState, useEffect } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { supabase } from '../../lib/supabaseClient.js'
 import { useColleges } from '../../hooks/useColleges.js'
 
 function Register() {
   const { colleges } = useColleges()
+  const navigate = useNavigate()
 
   const [staffType, setStaffType] = useState('teaching')
   const [surname, setSurname] = useState('')
@@ -20,7 +21,6 @@ function Register() {
 
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState(null)
-  const [submitted, setSubmitted] = useState(false)
 
   useEffect(() => {
     async function loadUnits() {
@@ -51,7 +51,7 @@ function Register() {
     setLoading(true)
     setError(null)
 
-    const { error } = await supabase.auth.signUp({
+    const { error: signUpError } = await supabase.auth.signUp({
       email,
       password,
       options: {
@@ -67,23 +67,27 @@ function Register() {
       },
     })
 
-    if (error) {
-      setError(error.message)
-    } else {
-      setSubmitted(true)
+    if (signUpError) {
+      setError(signUpError.message)
+      setLoading(false)
+      return
     }
-    setLoading(false)
-  }
 
-  if (submitted) {
-    return (
-      <div className="max-w-md mx-auto text-center">
-        <h1 className="text-funato-brown text-2xl font-bold mb-3">Check your email</h1>
-        <p className="text-funato-brown-dark">
-          We've sent a confirmation link to <strong>{email}</strong>. Click it to activate your account, then come back and log in.
-        </p>
-      </div>
-    )
+    // Auto-login after successful signup
+    const { error: signInError } = await supabase.auth.signInWithPassword({
+      email,
+      password,
+    })
+
+    if (signInError) {
+      setError(signInError.message)
+      setLoading(false)
+      return
+    }
+
+    // Redirect to profile editor
+    navigate('/staff/profile')
+    setLoading(false)
   }
 
   return (

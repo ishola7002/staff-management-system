@@ -64,13 +64,13 @@ function StaffBrowseMenu() {
     <div className="relative" ref={menuRef}>
       <button
         onClick={() => setOpen((prev) => !prev)}
-        className="hover:text-funato-brown-light text-sm sm:text-base"
+        className="hover:text-funato-brown-light text-sm font-medium"
       >
         Units
       </button>
 
-     {open && (
-  <div className="fixed top-16 left-0 right-0 sm:absolute sm:top-full sm:left-0 sm:right-auto bg-white border border-funato-brown-light rounded-md shadow-lg w-screen sm:w-80 mx-0 sm:mx-0 z-50 text-funato-brown-dark max-h-[calc(100vh-64px)] overflow-y-auto">
+      {open && (
+        <div className="fixed top-16 left-0 right-0 sm:absolute sm:top-full sm:left-0 sm:right-auto bg-white border border-funato-brown-light rounded-md shadow-lg w-screen sm:w-80 mx-0 sm:mx-0 z-50 text-funato-brown-dark max-h-[calc(100vh-64px)] overflow-y-auto">
           {/* Teaching row */}
           <div>
             <button
